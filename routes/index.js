@@ -3,7 +3,7 @@ const router = express.Router();
 const ToDoModel = require('../models/todoModel');
 const moment = require('moment');
 
-/* GET home page. */
+/* ToDoリスト表示 */
 router.get('/', function(req, res) {
   ToDoModel
     .find()
@@ -35,6 +35,7 @@ router.post('/', function(req, res) {
   });
 });
 
+/* ToDo変更 */
 router.post('/:id', function(req, res) {
   const todoId = req.params.id;
 

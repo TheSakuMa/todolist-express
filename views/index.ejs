@@ -6,33 +6,52 @@
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
   </head>
   <body>
-    <h1><%= title %></h1>
+    <header>
+      <h1><%= title %></h1>
+    </header>
     <div>
       <table>
         <th>
           <tr><th>やること</th><th>期限</th><th>優先度</th></tr>
         </th>
-        <% todoList.forEach(function(todo) { %>
-          <tr>
-            <form action="/<%= todo._id %>" method="post">
-              <td><input type="text" name="text" value="<%= todo.text %>" size="42" maxlength="100" required></td>
-              <td><input type="datetime-local" name="todoDate" value="<%= moment(todo.todoDate).format('YYYY-MM-DDThh:mm') %>"></td>
-              <td>
-                <select name="priority">
-                  <% for (let i = 1; i <= 3; i++) { %>
-                    <% if (i === todo.priority) { %>
-                      <option value="<%- i %>" selected><%- i %></option>
-                    <% } else { %>
-                      <option value="<%- i %>"><%- i %></option>
-                    <% } %>
+      <% todoList.forEach(function(todo) { %>
+        <tr>
+          <form action="/<%= todo._id %>" method="post">
+            <td><input type="text" name="text" value="<%= todo.text %>" size="42" maxlength="100" required></td>
+            <td><input type="datetime-local" name="todoDate" value="<%= moment(todo.todoDate).format('YYYY-MM-DDThh:mm') %>"></td>
+            <td>
+              <select name="priority" onchange="submit(this.form)">
+                <% for (let i = 1; i <= 3; i++) { %>
+                  <% if (i === todo.priority) { %>
+                    <option value="<%- i %>" selected><%- i %></option>
+                  <% } else { %>
+                    <option value="<%- i %>"><%- i %></option>
                   <% } %>
-                </select>
-              </td>
-              <td><input type="submit" value="変更"></td>
-            </form>
-          </tr>
-        <% }); %>
+                <% } %>
+              </select>
+            </td>
+          </form>
+        </tr>
+      <% }); %>
+        <tr>
+          <form action="/" method="post">
+            <td><input type="text" name="text" size="42" maxlength="100" required></td>
+            <td><input type="datetime-local" name="todoDate"></td>
+            <td>
+              <select name="priority">
+                <option value="1">1</option>
+                <option value="2">2</option>
+                <option value="3">3</option>
+              </select>
+            </td>
+          </form>
+        </tr>
       </table>
     </div>
+    <script type="text/javascript">
+      $(function() {
+
+      });
+    </script>
   </body>
 </html>

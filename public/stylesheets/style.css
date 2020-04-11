@@ -1,5 +1,4 @@
 body {
-  padding: 50px;
   font: 14px "Lucida Grande", Helvetica, Arial, sans-serif;
 }
 
@@ -8,7 +7,10 @@ a {
 }
 
 table {
+  width: 75%;
+  max-width: 540px;
   margin: 0 auto;
+  text-align: center;
 }
 
 header h1 {

@@ -16,3 +16,35 @@ table {
 header h1 {
   text-align: center;
 }
+
+.todoList {
+  text-align: center;
+}
+
+.list-header {
+  display: flex;
+  justify-content: space-evenly;
+}
+
+form {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  margin: 5px 0;
+}
+
+form div {
+  margin: 0 10px;
+}
+
+.checkbox {
+  width: 20px;
+  height: 20px;
+  padding: 0;
+  border: solid 1px #3a3939;
+  border-radius: 50%;
+}
+
+.post-todo div:first-of-type {
+  width: 22px;
+}

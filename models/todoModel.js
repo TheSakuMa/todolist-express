@@ -11,6 +11,7 @@ const todoSchema = new Schema({
   priority: Number,
   registDate: { type: Date, default: Date.now() },
   updatedDate: { type: Date, default: Date.now() },
+  status: { type: Boolean, default: true },
   deleteFlag: { type: Boolean, default: false }
 });
 

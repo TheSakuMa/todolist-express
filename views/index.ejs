@@ -9,45 +9,44 @@
     <header>
       <h1><%= title %></h1>
     </header>
-    <table>
-      <th>
-        <tr><th></th><th>やること</th><th>期限</th><th>優先度</th></tr>
-      </th>
+    <div class="todoList">
+      <div class="list-header">
+        <div class="list-header-item"></div>
+        <div class="list-header-item">やること</div>
+        <div class="list-header-item">期限</div>
+        <div class="list-header-item">優先度</div>
+      </div>
     <% todoList.forEach(function(todo) { %>
-      <tr>
-        <form action="/<%= todo._id %>" method="post">
-          <td class="checkbox"><input type="checkbox" name="check"></td>
-          <td><input type="text" name="text" value="<%= todo.text %>" size="42" maxlength="100" required></td>
-          <td><input type="datetime-local" name="todoDate" value="<%= moment(todo.todoDate).format('YYYY-MM-DDThh:mm') %>"></td>
-          <td>
-            <select name="priority" onchange="submit(this.form)">
-              <% for (let i = 1; i <= 3; i++) { %>
-                <% if (i === todo.priority) { %>
-                  <option value="<%- i %>" selected><%- i %></option>
-                <% } else { %>
-                  <option value="<%- i %>"><%- i %></option>
-                <% } %>
+      <form action="/<%= todo._id %>" method="post">
+        <div class="checkbox"></div>
+        <div><input type="text" name="text" value="<%= todo.text %>" size="42" maxlength="100" required></div>
+        <div><input type="datetime-local" name="todoDate" value="<%= moment(todo.todoDate).format('YYYY-MM-DDThh:mm') %>"></div>
+        <div>
+          <select name="priority" onchange="submit(this.form)">
+            <% for (let i = 1; i <= 3; i++) { %>
+              <% if (i === todo.priority) { %>
+                <option value="<%- i %>" selected><%- i %></option>
+              <% } else { %>
+                <option value="<%- i %>"><%- i %></option>
               <% } %>
-            </select>
-          </td>
-        </form>
-      </tr>
+            <% } %>
+          </select>
+        </div>
+      </form>
     <% }); %>
-      <tr>
-        <form action="/" method="post">
-          <td></td>
-          <td><input type="text" name="text" size="42" maxlength="100" required></td>
-          <td><input type="datetime-local" name="todoDate"></td>
-          <td>
-            <select name="priority">
-              <option value="1">1</option>
-              <option value="2">2</option>
-              <option value="3">3</option>
-            </select>
-          </td>
-        </form>
-      </tr>
-    </table>
+      <form action="/" method="post" class="post-todo">
+        <div></div>
+        <div><input type="text" name="text" size="42" maxlength="100" required></div>
+        <div><input type="datetime-local" name="todoDate"></div>
+        <div>
+          <select name="priority">
+            <option value="1">1</option>
+            <option value="2">2</option>
+            <option value="3">3</option>
+          </select>
+        </div>
+      </form>
+    </div>
     <script type="text/javascript">
       $(function() {
 

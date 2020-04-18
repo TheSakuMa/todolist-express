@@ -47,7 +47,52 @@ router.post('/:id', function(req, res) {
         todo.text = req.body.text;
         todo.todoDate = req.body.todoDate;
         todo.priority = req.body.priority;
+        todo.updatedDate = Date.now();
 
+        todo.save(function(err) {
+          if (err) {
+            req.send(err);
+          } else {
+            res.redirect('/');
+          }
+        });
+      }
+    });
+});
+
+/* DONE */
+router.post('/:id/done', function(req, res) {
+  const todoId = req.params.id;
+
+  ToDoModel
+    .findById(todoId, function(err, todo) {
+      if (err) {
+        res.send(err);
+      } else {
+        todo.status = false;
+        todo.updatedDate = Date.now();
+        todo.save(function(err) {
+          if (err) {
+            req.send(err);
+          } else {
+            res.redirect('/');
+          }
+        });
+      }
+    });
+});
+
+/* UNDO */
+router.post('/:id/undo', function(req, res) {
+  const todoId = req.params.id;
+
+  ToDoModel
+    .findById(todoId, function(err, todo) {
+      if (err) {
+        res.send(err);
+      } else {
+        todo.status = true;
+        todo.updatedDate = Date.now();
         todo.save(function(err) {
           if (err) {
             req.send(err);

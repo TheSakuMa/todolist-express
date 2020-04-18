@@ -45,6 +45,10 @@ form div {
   border-radius: 50%;
 }
 
+.checked>.checkbox {
+  background-color: skyblue;
+}
+
 .post-todo div:first-of-type {
   width: 22px;
 }

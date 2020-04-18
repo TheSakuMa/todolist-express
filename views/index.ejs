@@ -17,7 +17,11 @@
         <div class="list-header-item">優先度</div>
       </div>
     <% todoList.forEach(function(todo) { %>
-      <form action="/<%= todo._id %>" method="post">
+      <% if (todo.status) { %>
+        <form action="/<%= todo._id %>" method="post">
+      <% } else { %>
+        <form action="/<%= todo._id %>" method="post" class="checked">
+      <% } %>
         <div class="checkbox"></div>
         <div><input type="text" name="text" value="<%= todo.text %>" size="42" maxlength="100" required></div>
         <div><input type="datetime-local" name="todoDate" value="<%= moment(todo.todoDate).format('YYYY-MM-DDThh:mm') %>"></div>
@@ -49,7 +53,18 @@
     </div>
     <script type="text/javascript">
       $(function() {
-
+        $('.checkbox').click(
+          function() {
+            let attr = $(this).parent().attr('action');
+            if ($(this).parent().hasClass('checked')) {
+              $(this).parent().attr('action', `${attr}/undo`);
+              $(this).parent().submit();
+            } else {
+              $(this).parent().attr('action', `${attr}/done`);
+              $(this).parent().submit();
+            }
+          }
+        )
       });
     </script>
   </body>

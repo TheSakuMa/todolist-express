@@ -52,3 +52,13 @@ form div {
 .post-todo div:first-of-type {
   width: 22px;
 }
+
+#display-hide-btn {
+  text-decoration: underline;
+  -moz-user-select: none;
+  -webkit-user-select: none;
+}
+
+.hidden {
+  display: none;
+}

@@ -10,6 +10,9 @@
       <h1><%= title %></h1>
     </header>
     <div class="todoList">
+      <div class="display-hide">
+        <p class="display-btn" id="display-hide-btn">完了済表示</p>
+      </div>
       <div class="list-header">
         <div class="list-header-item"></div>
         <div class="list-header-item">やること</div>
@@ -20,7 +23,7 @@
       <% if (todo.status) { %>
         <form action="/<%= todo._id %>" method="post">
       <% } else { %>
-        <form action="/<%= todo._id %>" method="post" class="checked">
+        <form action="/<%= todo._id %>" method="post" class="checked hidden">
       <% } %>
         <div class="checkbox"></div>
         <div><input type="text" name="text" value="<%= todo.text %>" size="42" maxlength="100" required></div>
@@ -64,7 +67,23 @@
               $(this).parent().submit();
             }
           }
-        )
+        );
+
+        $('#display-hide-btn').click(
+          function() {
+            if ($(this).hasClass('display-btn')) {
+              $(this).removeClass('display-btn');
+              $(this).addClass('hide-btn');
+              $(this).text("非表示");
+              $('.checked').removeClass('hidden');
+            } else {
+              $(this).removeClass('hide-btn');
+              $(this).addClass('display-btn');
+              $(this).text("完了済表示");
+              $('.checked').addClass('hidden');
+            }
+          }
+        );
       });
     </script>
   </body>

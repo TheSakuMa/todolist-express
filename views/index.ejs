@@ -27,7 +27,7 @@
       <% } %>
         <div class="checkbox"></div>
         <div><input type="text" name="text" value="<%= todo.text %>" size="42" maxlength="100" required></div>
-        <div><input type="datetime-local" name="todoDate" value="<%= moment(todo.todoDate).format('YYYY-MM-DDThh:mm') %>"></div>
+        <div><input type="date" name="todoDate" value="<%= moment(todo.todoDate).format('YYYY-MM-DD') %>" class="todoDate"><input type="time" name="todoTime" value="<%= moment(todo.todoDate).format('hh:mm') %>" class="todoTime"></div>
         <div>
           <select name="priority" onchange="submit(this.form)">
             <% for (let i = 1; i <= 3; i++) { %>
@@ -44,7 +44,7 @@
       <form action="/" method="post" class="post-todo">
         <div></div>
         <div><input type="text" name="text" size="42" maxlength="100" required></div>
-        <div><input type="datetime-local" name="todoDate"></div>
+        <div><input type="date" name="todoDate" class="todoDate"><input type="time" name="todoTime" class="todoTime"></div>
         <div>
           <select name="priority">
             <option value="1">1</option>

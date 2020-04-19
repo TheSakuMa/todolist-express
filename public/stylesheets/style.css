@@ -37,6 +37,14 @@ form div {
   margin: 0 10px;
 }
 
+.todoDate {
+  width: 60%;
+}
+
+.todoTime {
+  width: 35%;
+}
+
 .checkbox {
   width: 20px;
   height: 20px;

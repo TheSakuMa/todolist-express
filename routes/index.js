@@ -21,7 +21,10 @@ router.get('/', function(req, res) {
 router.post('/', function(req, res) {
   const ToDo = new ToDoModel();
   ToDo.text = req.body.text;
-  ToDo.todoDate = req.body.todoDate;
+  /* 20200419メモ: 日付のみの場合や時刻のみの場合にどう対応するかを決め、実装する */
+  if (req.body.todoDate) {
+    ToDo.todoDate = req.body.todoDate + 'T' + req.body.todoTime;
+  }
   if (req.body.priority) {
     ToDo.priority = req.body.priority;
   }
@@ -45,13 +48,16 @@ router.post('/:id', function(req, res) {
         res.send(err);
       } else {
         todo.text = req.body.text;
-        todo.todoDate = req.body.todoDate;
+        /* 20200419メモ: 日付のみや時刻のみに変更した場合にどう対応するかを決め、実装する */
+        if (req.body.todoDate) {
+          ToDo.todoDate = req.body.todoDate + 'T' + req.body.todoTime;
+        }
         todo.priority = req.body.priority;
         todo.updatedDate = Date.now();
 
         todo.save(function(err) {
           if (err) {
-            req.send(err);
+            res.send(err);
           } else {
             res.redirect('/');
           }

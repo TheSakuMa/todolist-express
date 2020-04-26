@@ -63,7 +63,11 @@ router.post('/:id', function(req, res) {
             todo.todoTime = req.body.todoDate + 'T' + req.body.todoTime;
           }
         } else if (req.body.todoTime) {
+          todo.todoDate = null;
           todo.todoTime = moment(new Date()).format("YYYY-MM-DD") + 'T' + req.body.todoTime;
+        } else {
+          todo.todoDate = null;
+          todo.todoTime = null;
         }
 
         todo.priority = req.body.priority;

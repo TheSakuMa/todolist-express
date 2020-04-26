@@ -7,13 +7,6 @@ a {
   color: #00B7FF;
 }
 
-table {
-  width: 75%;
-  max-width: 540px;
-  margin: 0 auto;
-  text-align: center;
-}
-
 header h1 {
   text-align: center;
 }
@@ -24,7 +17,16 @@ header h1 {
 
 .list-header {
   display: flex;
-  justify-content: space-evenly;
+  justify-content: center;
+}
+
+.list-header-item {
+  margin: 0 10px;
+}
+
+.list-header-item:nth-of-type(1) {
+  width: 20px;
+  height: 20px;
 }
 
 form {
@@ -38,9 +40,24 @@ form div {
   margin: 0 10px;
 }
 
+.text-div {
+  width: 30%;
+}
+
+.text-div input {
+  width: 100%;
+  font-size: 12px;
+}
+
+.schedule {
+  width: 25%;
+  max-width: 200px;
+}
+
 .todoDate {
-  width: 55%;
+  width: 50%;
   height: 13px;
+  font-size: 12px;
 }
 
 .todoTime {
@@ -65,6 +82,10 @@ form div {
 
 .post-todo div:first-of-type {
   width: 20px;
+}
+
+.post-todo div:nth-of-type(3) {
+  text-align: center;
 }
 
 #display-hide-btn {

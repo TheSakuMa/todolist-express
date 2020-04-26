@@ -17,8 +17,8 @@
       </div>
       <div class="list-header">
         <div class="list-header-item"></div>
-        <div class="list-header-item">やること</div>
-        <div class="list-header-item">期限</div>
+        <div class="list-header-item text-div">やること</div>
+        <div class="list-header-item schedule">期限</div>
         <div class="list-header-item">優先度</div>
       </div>
     <% todoList.forEach(function(todo) { %>
@@ -28,15 +28,15 @@
         <form action="/<%= todo._id %>" method="post" class="checked hidden" name="todo-list">
       <% } %>
         <div class="checkbox"></div>
-        <div><input type="text" name="text" value="<%= todo.text %>" size="42" maxlength="100" required></div>
-        <div>
+        <div class="text-div"><input type="text" name="text" value="<%= todo.text %>" size="42" maxlength="100" required></div>
+        <div class="schedule">
         <% if (todo.todoDate != null) { %>
           <input type="text" name="todoDate" value="<%= moment(todo.todoDate).format('YYYY-MM-DD') %>" class="todoDate datepicker">
         <% } else { %>
           <input type="text" name="todoDate" class="todoDate datepicker">
         <% } %>
         <% if (todo.todoTime != null) { %>
-          <input type="time" name="todoTime" value="<%= moment(todo.todoTime).format('hh:mm') %>" class="todoTime">
+          <input type="time" name="todoTime" value="<%= moment(todo.todoTime).format('HH:mm') %>" class="todoTime">
         <% } else { %>
           <input type="time" name="todoTime" class="todoTime">
         <% } %>
@@ -56,8 +56,11 @@
     <% }); %>
       <form action="/" method="post" class="post-todo">
         <div></div>
-        <div><input type="text" name="text" size="42" maxlength="100" required></div>
-        <div><input type="text" name="todoDate" class="todoDate datepicker"><input type="time" name="todoTime" class="todoTime"></div>
+        <div class="text-div"><input type="text" name="text" size="42" maxlength="100" required></div>
+        <div class="schedule">
+          <input type="text" name="todoDate" class="todoDate datepicker-topost">
+          <input type="time" name="todoTime" class="todoTime">
+        </div>
         <div>
           <select name="priority">
             <option value="1">1</option>
@@ -104,10 +107,25 @@
           }
         });
 
-        $('.datepicker').datepicker({
-          dateFormat: "yy-mm-dd",
+        $(".todoTime").keydown(function (e) {
+          if (e.keyCode == 13) {
+            $(this).parent().parent().submit();
+          }
         });
 
+        /* datepicker */
+        $('.datepicker').datepicker({
+          dateFormat: "yy-mm-dd",
+          onSelect: function() {
+            const element = $(this).parent().parent().find('.text-div').children();
+            if (element.val() != "") {
+              $(this).parent().parent().submit();
+            }
+          }
+        });
+        $('.datepicker-topost').datepicker({
+          dateFormat: "yy-mm-dd",
+        });
         $.datepicker.formatDate("yy-mm-dd");
       });
     </script>

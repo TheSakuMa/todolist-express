@@ -2,11 +2,13 @@ const express = require('express');
 const router = express.Router();
 const ToDoModel = require('../models/todoModel');
 const moment = require('moment');
+moment.locale("ja");
 
 /* ToDoリスト表示 */
 router.get('/', function(req, res) {
   ToDoModel
     .find()
+    .sort({status: 1, todoDate: 1, priority: 1, todoTime: 1}) // status: falseが先にくるようにソート
     .then(function(todoList) {
       /* res.json(todoList); */
       res.render('index', {
@@ -21,7 +23,7 @@ router.get('/', function(req, res) {
 router.post('/', function(req, res) {
   const ToDo = new ToDoModel();
   ToDo.text = req.body.text;
-  /* 20200419メモ: 日付のみの場合や時刻のみの場合にどう対応するかを決め、実装する */
+  /* 日付・時刻について、どちらか一方のみの登録にも対応するための処理 */
   if (req.body.todoDate) {
     ToDo.todoDate = req.body.todoDate;
     if (req.body.todoTime) {
@@ -54,7 +56,7 @@ router.post('/:id', function(req, res) {
         res.send(err);
       } else {
         todo.text = req.body.text;
-        /* 20200419メモ: 日付・時刻なしの場合・日付のみや時刻のみに変更した場合にどう対応するかを決め、実装する */
+        /* 日付・時刻について、どちらか一方のみへの変更にも対応するための処理 */
         if (req.body.todoDate) {
           todo.todoDate = req.body.todoDate;
           if (req.body.todoTime) {
@@ -63,6 +65,7 @@ router.post('/:id', function(req, res) {
         } else if (req.body.todoTime) {
           todo.todoTime = moment(new Date()).format("YYYY-MM-DD") + 'T' + req.body.todoTime;
         }
+
         todo.priority = req.body.priority;
         todo.updatedDate = Date.now();
 

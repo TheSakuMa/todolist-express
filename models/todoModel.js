@@ -8,6 +8,7 @@ const Schema = mongoose.Schema;
 const todoSchema = new Schema({
   text: { type: String, max: 100, required: true },
   todoDate: { type: Date, default: null },
+  todoTime: { type: Date, default: null },
   priority: Number,
   registDate: { type: Date, default: Date.now() },
   updatedDate: { type: Date, default: Date.now() },

@@ -1,5 +1,6 @@
 body {
   font: 14px "Lucida Grande", Helvetica, Arial, sans-serif;
+  margin: 0;
 }
 
 a {
@@ -38,11 +39,16 @@ form div {
 }
 
 .todoDate {
-  width: 60%;
+  width: 55%;
+  height: 13px;
 }
 
 .todoTime {
   width: 35%;
+}
+
+.todoDate .todoTime {
+  display: inline-block;
 }
 
 .checkbox {
@@ -58,7 +64,7 @@ form div {
 }
 
 .post-todo div:first-of-type {
-  width: 22px;
+  width: 20px;
 }
 
 #display-hide-btn {

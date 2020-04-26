@@ -23,8 +23,14 @@ router.post('/', function(req, res) {
   ToDo.text = req.body.text;
   /* 20200419メモ: 日付のみの場合や時刻のみの場合にどう対応するかを決め、実装する */
   if (req.body.todoDate) {
-    ToDo.todoDate = req.body.todoDate + 'T' + req.body.todoTime;
+    ToDo.todoDate = req.body.todoDate;
+    if (req.body.todoTime) {
+      ToDo.todoTime = req.body.todoDate + 'T' + req.body.todoTime;
+    }
+  } else if (req.body.todoTime) {
+    ToDo.todoTime = moment(new Date()).format("YYYY-MM-DD") + 'T' + req.body.todoTime;
   }
+
   if (req.body.priority) {
     ToDo.priority = req.body.priority;
   }
@@ -48,9 +54,14 @@ router.post('/:id', function(req, res) {
         res.send(err);
       } else {
         todo.text = req.body.text;
-        /* 20200419メモ: 日付のみや時刻のみに変更した場合にどう対応するかを決め、実装する */
+        /* 20200419メモ: 日付・時刻なしの場合・日付のみや時刻のみに変更した場合にどう対応するかを決め、実装する */
         if (req.body.todoDate) {
-          ToDo.todoDate = req.body.todoDate + 'T' + req.body.todoTime;
+          todo.todoDate = req.body.todoDate;
+          if (req.body.todoTime) {
+            todo.todoTime = req.body.todoDate + 'T' + req.body.todoTime;
+          }
+        } else if (req.body.todoTime) {
+          todo.todoTime = moment(new Date()).format("YYYY-MM-DD") + 'T' + req.body.todoTime;
         }
         todo.priority = req.body.priority;
         todo.updatedDate = Date.now();

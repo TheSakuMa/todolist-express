@@ -56,11 +56,13 @@ router.post('/:id', function(req, res) {
         res.send(err);
       } else {
         todo.text = req.body.text;
-        /* 日付・時刻について、どちらか一方のみへの変更にも対応するための処理 */
+        /* 日付・時刻について、どちらか一方のみ、あるいはnullへの変更にも対応するための処理 */
         if (req.body.todoDate) {
           todo.todoDate = req.body.todoDate;
           if (req.body.todoTime) {
             todo.todoTime = req.body.todoDate + 'T' + req.body.todoTime;
+          } else {
+            todo.todoTime = null;
           }
         } else if (req.body.todoTime) {
           todo.todoDate = null;
